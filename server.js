@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3000;
 const app = express();
 const bodyParser = require("body-parser");
+const cheerio = require("cheerio");
+const axios = require("axios");
 
 // Set public folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -40,7 +42,7 @@ mongoose.connect(db, { useNewUrlParser: true }, err => {
   if (err) {
     console.log(err);
   } else {
-    console.log("Database connection successfull");
+    console.log("Database connection successful");
   }
 });
 
