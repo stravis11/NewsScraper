@@ -34,6 +34,8 @@ app.set("view engine", "handlebars");
 // Set requests to go through router
 app.use(router);
 
+require("./config/routes")(router);
+
 // Set deployed or localal database
 const db = process.env.MONGODB_URI || "mongodb://127.0.0.1/mongoHeadlines";
 
