@@ -6,8 +6,6 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3000;
 const app = express();
 const bodyParser = require("body-parser");
-const cheerio = require("cheerio");
-const axios = require("axios");
 
 // Set public folder
 app.use(express.static(path.join(__dirname, "public")));

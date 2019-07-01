@@ -1,7 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const scrapeArticle = function(cb) {
+const scrapeArticle = cb => {
   axios.get("http://www.nytimes.com", (err, res, body) => {
     let $ = cheerio.load(body);
     let articles = [];
