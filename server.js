@@ -6,13 +6,14 @@ const exphbs = require("express-handlebars");
 // PORT Setup
 const PORT = process.env.PORT || 3000;
 
-// Instantiate Express & Require Routes
+// Express & Require Routes
 const app = express();
 const routes = require("./routes");
 
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 // Make public a static folder
 app.use(express.static(`${__dirname}/public`));
 
@@ -20,10 +21,10 @@ app.use(express.static(`${__dirname}/public`));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Request Route Middleware
+// Request route
 app.use(routes);
 
-// Set deployed or localal database
+// Set deployed or local database
 const db = process.env.MONGODB_URI || "mongodb://127.0.0.1/mongoHeadlines";
 
 // Connect to database
