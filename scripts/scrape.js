@@ -1,4 +1,4 @@
-// scrape script
+// Scrape script
 
 // Axios & Cheerio
 const axios = require("axios");
@@ -13,7 +13,7 @@ const scrape = function() {
     // Article Info Array
     const articles = [];
 
-    // Find & Looop Through Each Articles Element
+    // Find & looop through each article element
     // $("div.css-1ee8y2t").each(function(i, element)
     $("div.css-1qiat4j").each(function(i, element) {
       // Grab Headline Text From Story Heading Class

@@ -61,8 +61,7 @@ $(document).ready(function() {
   }
 
   function renderEmpty() {
-    // This function renders some HTML to the page explaining we don't have any articles to view
-    // Using a joined array of HTML string data because it's easier to read/change than a concatenated string
+    // This function renders some HTML to the page when there are no articles to view
     const emptyAlert = $(
       [
         "<div class='alert alert-warning text-center'>",
@@ -85,8 +84,6 @@ $(document).ready(function() {
 
   function handleArticleSave() {
     // This function is triggered when the user wants to save an article
-    // When we rendered the article initially, we attached a javascript object containing the headline id
-    // to the element using the .data method. Here we retrieve that.
     const articleToSave = $(this)
       .parents(".card")
       .data();
@@ -114,9 +111,6 @@ $(document).ready(function() {
   function handleArticleScrape() {
     // This function handles the user clicking any "scrape new articles" buttons
     $.get("/api/fetch").then(data => {
-      // If we are able to successfully scrape the NYTIMES and compare the articles to those
-      // already in our collection, re render the articles on the page
-      // and let the user know how many unique articles we were able to save
       initPage();
       bootbox.alert($("<h3 class='text-center m-top-80'>").text(data.message));
     });
