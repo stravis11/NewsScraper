@@ -1,38 +1,27 @@
 // Dependencies
 const express = require("express");
-const exphbs = require("express-handlebars");
-const path = require("path");
 const mongoose = require("mongoose");
+const exphbs = require("express-handlebars");
+
+// PORT Setup
 const PORT = process.env.PORT || 3000;
+
+// Instantiate Express & Require Routes
 const app = express();
-const bodyParser = require("body-parser");
+const routes = require("./routes");
 
-// Set public folder
-app.use(express.static(path.join(__dirname, "public")));
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// Make public a static folder
+app.use(express.static(`${__dirname}/public`));
 
-// Set express router
-const router = express.Router();
-
-// Use bodyParser
-app.use(
-  bodyParser.urlencoded({
-    extended: false
-  })
-);
-
-// Connect handlebars to express app
-app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
-);
+// Connect Handlebars & Express
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Set requests to go through router
-app.use(router);
-
-require("./config/routes")(router);
+// Request Route Middleware
+app.use(routes);
 
 // Set deployed or localal database
 const db = process.env.MONGODB_URI || "mongodb://127.0.0.1/mongoHeadlines";
@@ -45,6 +34,5 @@ mongoose.connect(db, { useNewUrlParser: true }, err => {
     console.log("Database connection successful");
   }
 });
-
 // Listen on port
 app.listen(PORT, () => console.log("Listening on port %s", PORT));
